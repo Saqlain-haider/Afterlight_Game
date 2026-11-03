@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#080b15">
+  <meta name="description" content="A neon-soaked arena survival game. Hold the line. Find the signal. Get out alive.">
+  <title>AFTERLIGHT — Hold the line</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="game-shell" id="gameShell">
+    <canvas id="game" aria-label="Afterlight game arena"></canvas>
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <header class="topbar" id="topbar" aria-live="polite">
+      <div class="brand-mark"><span class="brand-icon">✳</span><span>AFTERLIGHT</span></div>
+      <div class="run-stats">
+        <div class="stat"><span class="stat-label">SECTOR</span><strong id="waveValue">01</strong></div>
+        <div class="stat"><span class="stat-label">ELAPSED</span><strong id="timeValue">00:00</strong></div>
+        <div class="stat"><span class="stat-label">SCORE</span><strong id="scoreValue">0000</strong></div>
+        <div class="stat"><span class="stat-label">ELIMS</span><strong id="killsValue">000</strong></div>
+      </div>
+      <button class="icon-button pause-button" id="pauseButton" aria-label="Pause game" title="Pause (Esc)">Ⅱ</button>
+    </header>
+
+    <section class="combat-hud" id="combatHud" aria-label="Player status">
+      <div class="health-row"><span class="hud-label">VITALS</span><span id="healthText">100 / 100</span></div>
+      <div class="meter health-meter"><div id="healthFill"></div></div>
+      <div class="xp-row"><span class="hud-label">SIGNAL <b id="levelText">LV 01</b></span><span id="xpText">0 / 8</span></div>
+      <div class="meter xp-meter"><div id="xpFill"></div></div>
+    </section>
+
+    <div class="boss-hud" id="bossHud"><div class="boss-label">THE WARDEN <span>THREAT CLASS · NULL</span></div><div class="meter boss-meter"><div id="bossFill"></div></div></div>
+    <div class="toast" id="toast" role="status"></div>
+
+    <section class="screen screen-menu is-visible" id="menuScreen">
+      <div class="menu-copy">
+        <p class="eyebrow"><span class="live-dot"></span> FIELD REPORT  //  2089.06</p>
+        <h1>THE CITY<br>IS <em>LISTENING.</em></h1>
+        <p class="intro">The last signal is buried beneath the ruins.<br>Stay alive long enough to hear it.</p>
+        <button class="primary-button" id="startButton"><span>ENTER THE DARK</span><b>↗</b></button>
+        <div class="control-hint"><span>W A S D</span> MOVE <i>·</i> <span>SPACE</span> DASH <i>·</i> AUTO-FIRE</div>
+      </div>
+      <div class="menu-side">
+        <div class="record-card"><span class="eyebrow">PERSONAL BEST</span><strong id="bestScore">—</strong><small id="bestMeta">NO FIELD DATA</small></div>
+        <div class="signal-mark" aria-hidden="true"><div class="signal-ring ring-one"></div><div class="signal-ring ring-two"></div><div class="signal-core">✳</div><div class="signal-cross cross-x"></div><div class="signal-cross cross-y"></div></div>
+        <span class="side-note">NORTH DISTRICT / SECTOR 09</span>
+      </div>
+      <span class="version-tag">A FIELD STUDY IN SURVIVAL · v1.0</span>
+    </section>
+
+    <section class="screen modal-screen" id="pauseScreen" aria-hidden="true">
+      <div class="modal-card compact-card"><p class="eyebrow">SIGNAL INTERRUPTED</p><h2>TAKE A BREATH.</h2><p class="modal-copy">The city can wait.</p><button class="primary-button full-button" id="resumeButton"><span>BACK INTO IT</span><b>↗</b></button><button class="text-button" id="quitButton">ABANDON RUN</button></div>
+    </section>
+
+    <section class="screen modal-screen" id="upgradeScreen" aria-hidden="true">
+      <div class="upgrade-panel"><p class="eyebrow"><span class="live-dot"></span> SIGNAL STRENGTHENED</p><h2>CHOOSE YOUR<br><em>EDGE.</em></h2><p class="modal-copy">One upgrade. No second chances.</p><div class="upgrade-grid" id="upgradeGrid"></div></div>
+    </section>
+
+    <section class="screen modal-screen" id="gameOverScreen" aria-hidden="true">
+      <div class="modal-card gameover-card"><p class="eyebrow">CONNECTION LOST</p><h2>THE CITY<br><em>KEEPS YOU.</em></h2><div class="final-stats"><div><span>FINAL SCORE</span><strong id="finalScore">0000</strong></div><div><span>TIME SURVIVED</span><strong id="finalTime">00:00</strong></div><div><span>SECTOR REACHED</span><strong id="finalWave">01</strong></div><div><span>THREATS CLEARED</span><strong id="finalKills">000</strong></div></div><p class="new-record" id="newRecord">✳ &nbsp; NEW PERSONAL BEST</p><button class="primary-button full-button" id="retryButton"><span>RUN IT BACK</span><b>↗</b></button><button class="text-button" id="menuButton">RETURN TO MENU</button></div>
+    </section>
+
+    <div class="touch-controls" id="touchControls" aria-label="Touch controls">
+      <div class="joystick" id="joystick" aria-label="Move joystick"><div class="joy-ring"></div><div class="joy-knob" id="joyKnob"></div></div>
+      <button class="dash-button" id="dashButton" aria-label="Dash"><span>↯</span><small>DASH</small></button>
+    </div>
+    <footer class="mobile-tip" id="mobileTip">MOVE WITH THE STICK <span>·</span> YOUR WEAPON FIRES AUTOMATICALLY</footer>
+  </main>
+  <script src="game.js" defer></script>
+</body>
+</html>
